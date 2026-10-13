@@ -1,0 +1,54 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Quarto pequeno visto de cima</title>
+<style>html,body{margin:0;background:#FAF7F1}canvas{display:block}</style></head>
+<body><canvas id="c" width="1080" height="1350"></canvas>
+<script src="pintura_ld.js"></script>
+<script>
+// Cena: um quarto de 3,00 x 3,20 m visto de cima, NA ESCALA (1 m = 290 px).
+// Cama de solteiro (estrutura 0,95 x 1,95) na parede de cima; guarda-roupa de 0,55 na direita, de correr;
+// nichos baixos de 0,35 na esquerda; porta de 0,80 na parede de baixo; o meio livre com o tapete.
+semear(77);
+papel();
+const M=290, X0=105, Y0=180, LX=3.00*M, LY=3.20*M, PAR=0.14*M;
+pinta(ret(X0-PAR,Y0-PAR,LX+2*PAR,LY+2*PAR), P.salviaEsc, {amp:3, seca:0.4});
+pinta(ret(X0,Y0,LX,LY), mistura(P.dourado,0.3), {amp:3, angulo:0.02, seca:0.6});
+for(let i=1;i<9;i++){ traco(X0+4,Y0+i*LY/9,X0+LX-4,Y0+i*LY/9,P.marrom,1.2,0.15); }
+// janela na parede de cima e porta na parede de baixo, com o giro
+pinta(ret(X0+1.80*M,Y0-PAR,1.00*M,PAR), mistura(P.blush,0.5), {amp:2});
+traco(X0+1.80*M,Y0-PAR/2,X0+2.80*M,Y0-PAR/2,P.creme,3,0.9);
+const PX=X0+0.15*M, PL=0.80*M;
+pinta(ret(PX,Y0+LY,PL,PAR), P.creme, {amp:2});
+ctx.save(); ctx.globalAlpha=0.5; ctx.strokeStyle=P.marrom; ctx.lineWidth=2; ctx.setLineDash([8,8]);
+ctx.beginPath(); ctx.arc(PX,Y0+LY,PL,-Math.PI/2,0); ctx.stroke(); ctx.restore();
+pinta(ret(PX-4,Y0+LY-PL,8,PL), mistura(P.dourado,-0.3), {amp:1});
+// cama encostada na parede de cima
+const CL=0.95*M, CC=1.95*M, CX0=X0+0.30*M;
+pinta(ret(CX0,Y0,CC,CL), mistura(P.dourado,-0.2), {amp:3, seca:0.5});
+pinta(ret(CX0+10,Y0+8,CC-20,CL-16), P.creme, {amp:3, seca:0.3});
+pinta(ret(CX0+0.70*M,Y0+8,CC-0.70*M-10,CL-16), P.terracota, {amp:4, seca:0.5});
+pinta(ret(CX0+22,Y0+22,0.40*M,CL-44), P.salvia, {amp:3});
+// guarda-roupa de 0,55 na parede da direita, porta de correr
+const GP=0.55*M, GY=Y0+1.20*M;
+pinta(ret(X0+LX-GP,GY,GP,1.60*M), mistura(P.creme,-0.06), {amp:3, seca:0.4});
+traco(X0+LX-GP+14,GY+0.80*M,X0+LX-14,GY+0.80*M,P.marrom,2,0.35);
+// nichos baixos de 0,35 na parede da esquerda
+const NY=Y0+1.05*M;
+pinta(ret(X0,NY,0.35*M,1.20*M), mistura(P.creme,-0.04), {amp:3, seca:0.4});
+[P.salvia,P.blush,P.dourado].forEach((c,k)=>pinta(ret(X0+12,NY+12+k*0.40*M,0.35*M-24,0.40*M-24), c, {amp:2, seca:0.5}));
+// o meio livre: tapete redondo e brinquedos
+const CX=X0+1.55*M, CY=Y0+1.95*M;
+pinta(circ(CX,CY,0.58*M,0.58*M), P.blush, {amp:6, seca:0.6, alfa:0.9});
+pinta(circ(CX,CY,0.38*M,0.38*M), mistura(P.blush,0.3), {amp:4, seca:0.6, alfa:0.85});
+pinta(circ(CX-60,CY-30,22,22), P.terracota, {amp:2});
+pinta(ret(CX+30,CY+20,46,30), P.salviaEsc, {amp:2});
+pinta(estrela(CX+10,CY-70,20), P.dourado, {amp:1.5});
+ctx.save(); ctx.globalAlpha=0.55; ctx.strokeStyle=P.terraEsc; ctx.lineWidth=3; ctx.setLineDash([14,10]);
+ctx.beginPath(); ctx.arc(CX,CY,0.70*M,0,2*Math.PI); ctx.stroke(); ctx.restore();
+escreve('o meio livre', CX, CY+0.70*M+40, {tam:34, alinhar:'center'});
+escreve('3,00 m', X0+LX/2, Y0-PAR-18, {tam:28, cor:P.salviaEsc, alinhar:'center'});
+escreve('cama', CX0+CC/2, Y0+CL+34, {tam:24, cor:P.marrom, alinhar:'center'});
+escreve('guarda-roupa', X0+LX-GP/2, GY-14, {tam:24, cor:P.marrom, alinhar:'center'});
+escreve('nichos', X0+0.35*M+12, NY-12, {tam:24, cor:P.marrom});
+escreve('porta', PX+PL+14, Y0+LY-12, {tam:24, cor:P.marrom});
+assinatura();
+window.__pronto = true;
+</script></body></html>

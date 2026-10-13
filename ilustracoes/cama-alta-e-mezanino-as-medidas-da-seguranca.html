@@ -1,0 +1,62 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Mezanino pintado</title>
+<style>html,body{margin:0;background:#FAF7F1}canvas{display:block}</style></head>
+<body><canvas id="c" width="1080" height="1350"></canvas>
+<script src="pintura_ld.js"></script>
+<script>
+// Cena: mezanino visto de frente, NA ESCALA (1 m = 320 px). Teto a 2,70 m; piso do mezanino a 1,40 m;
+// 1,30 m livres em cima; guarda-corpo de ripas em pé; escada com degraus a cada 25 cm; tatame embaixo.
+semear(21);
+papel();
+const M=360, PISO=1110, TETO=PISO-2.70*M, DECK=PISO-1.40*M;
+pinta(ret(40,TETO,W-80,PISO-TETO), P.areia, {amp:5, angulo:Math.PI/2, seca:0.9, alfa:0.55});      // parede
+pinta(ret(40,PISO,W-80,H-PISO-70), mistura(P.dourado,0.25), {amp:5, angulo:0.02, seca:0.6});         // piso
+pinta(ret(40,PISO-12,W-80,20), P.creme, {amp:3, seca:0.3});                                           // rodapé
+traco(40,TETO,W-40,TETO,P.marrom,3,0.35);                                                              // linha do teto
+
+// janela
+pinta(ret(800,TETO+150,210,250), P.creme, {amp:4, angulo:Math.PI/2, seca:0.4});
+pinta(ret(816,TETO+166,178,218), mistura(P.blush,0.5), {amp:3, seca:0.7});
+pinta([[816,TETO+330],[880,TETO+300],[950,TETO+320],[994,TETO+300],[994,TETO+384],[816,TETO+384]], P.salvia, {amp:4});
+
+// o mezanino: pilares, viga e piso
+const X0=90, X1=640, ESP=0.12*M;
+pinta(ret(X0,DECK,X1-X0,ESP), mistura(P.dourado,-0.28), {amp:3, angulo:0.01, seca:0.5});             // piso/viga
+pinta(ret(X0,DECK,34,PISO-DECK), mistura(P.dourado,-0.32), {amp:3, angulo:Math.PI/2, seca:0.5});        // pilar
+pinta(ret(X1-34,DECK,34,PISO-DECK), mistura(P.dourado,-0.32), {amp:3, angulo:Math.PI/2, seca:0.5});
+// colchão e manta em cima
+pinta(ret(X0+10,DECK-0.10*M,X1-X0-20,0.10*M), mistura(P.creme,-0.03), {amp:3, seca:0.3});
+pinta(ret(X0+120,DECK-0.10*M-4,300,26), P.terracota, {amp:4, seca:0.5});
+pinta(circ(X0+70,DECK-0.10*M-16,36,22), P.blush, {amp:3});
+// guarda-corpo: SÓ ripas em pé, com o corrimão no topo; abertura da escada à direita
+const TOPO=DECK-0.40*M;
+pinta(ret(X0,TOPO,X1-X0-150,14), mistura(P.dourado,-0.3), {amp:2, seca:0.3});
+for(let x=X0+6; x<X1-160; x+=26) pinta(ret(x,TOPO+10,12,DECK-TOPO-10), mistura(P.dourado,-0.18), {amp:1.5, angulo:Math.PI/2, seca:0.3});
+pinta(ret(X0,TOPO,14,DECK-TOPO), mistura(P.dourado,-0.3), {amp:1.5});
+pinta(ret(X1-34,TOPO-20,14,DECK-TOPO+20), mistura(P.dourado,-0.3), {amp:1.5});                        // a alça da chegada
+// a escada: banzos e degraus a cada 25 cm
+const EX0=X1-140, EX1=X1-56;
+pinta(ret(EX0,DECK-0.45*M,16,PISO-DECK+0.45*M), mistura(P.dourado,-0.3), {amp:2, angulo:Math.PI/2});
+pinta(ret(EX1,DECK-0.45*M,16,PISO-DECK+0.45*M), mistura(P.dourado,-0.3), {amp:2, angulo:Math.PI/2});
+for(let h=0.25; h<1.40; h+=0.25) pinta(ret(EX0,PISO-h*M-8,EX1-EX0+16,16), mistura(P.dourado,-0.15), {amp:1.5});
+// o canto de leitura embaixo
+pinta(circ(200,PISO-50,80,44), P.salvia, {amp:5, seca:0.6});
+pinta(circ(290,PISO-40,56,34), P.blush, {amp:5, seca:0.6});
+pinta(ret(330,PISO-170,100,160), mistura(P.creme,-0.05), {amp:3, seca:0.4});                          // estante baixa
+[[338,60,P.terracota],[366,50,P.salviaEsc],[390,64,P.dourado]].forEach(([x,h,c])=>pinta(ret(x,PISO-100-h,22,h),c,{amp:1.5, angulo:Math.PI/2}));
+// o tatame na frente da escada e embaixo
+pinta(ret(440,PISO+18,300,46), mistura(P.salvia,0.25), {amp:4, seca:0.4});
+pinta(ret(110,PISO+18,320,46), mistura(P.salvia,0.25), {amp:4, seca:0.4});
+
+// as medidas, pintadas
+traco(440,TETO+8,440,DECK-4,P.terraEsc,3,0.85);
+traco(425,TETO+8,455,TETO+8,P.terraEsc,3,0.85); traco(425,DECK-4,455,DECK-4,P.terraEsc,3,0.85);
+escreve('1,30 m livres', 420, (TETO+TOPO)/2+10, {tam:36, alinhar:'right'});
+traco(1000,DECK,1000,PISO,P.salviaEsc,3,0.7);
+traco(985,DECK,1015,DECK,P.salviaEsc,3,0.7); traco(985,PISO,1015,PISO,P.salviaEsc,3,0.7);
+escreve('1,40 m', 990, DECK+70, {tam:30, cor:P.salviaEsc, alinhar:'right'});
+escreve('degraus a', X1+30, PISO-0.80*M, {tam:26, cor:P.marrom}); escreve('cada 25 cm', X1+30, PISO-0.80*M+32, {tam:26, cor:P.marrom});
+escreve('ripas em pé', X0+40, TOPO-26, {tam:28, cor:P.marrom});
+escreve('tatame', 470, PISO+120, {tam:26, cor:P.marrom});
+assinatura();
+window.__pronto = true;
+</script></body></html>

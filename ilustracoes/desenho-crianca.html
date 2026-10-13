@@ -1,0 +1,61 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Desenho de criança</title>
+<style>html,body{margin:0;background:#fff}canvas{display:block}</style></head>
+<body><canvas id="c" width="900" height="900"></canvas>
+<script src="pintura_ld.js"></script>
+<script>
+// Um desenho de criança em giz de cera: o quarto que ela imagina (exemplo para o diploma).
+semear(5);
+ctx.fillStyle='#fffdf8'; ctx.fillRect(0,0,W,H);
+for(let i=0;i<6000;i++){ ctx.globalAlpha=r(0.02,0.05); ctx.fillStyle='#d8d0c4'; ctx.fillRect(r(0,W),r(0,H),1.5,1.5); }
+ctx.globalAlpha=1;
+// giz: muitos traços finos e tremidos em volta do caminho
+function giz(pts, cor, larg=7, fechado=false){
+  for(let k=0;k<4;k++){
+    ctx.save(); ctx.globalAlpha=r(0.35,0.6); ctx.strokeStyle=cor; ctx.lineWidth=larg*r(0.5,1); ctx.lineCap='round'; ctx.lineJoin='round';
+    ctx.beginPath();
+    const L = fechado ? [...pts, pts[0]] : pts;
+    L.forEach(([x,y],i)=>{ const jx=x+r(-4,4), jy=y+r(-4,4); i?ctx.lineTo(jx,jy):ctx.moveTo(jx,jy); });
+    ctx.stroke(); ctx.restore();
+  }
+}
+// rabisco de preencher, em zigue-zague
+function rabisca(x0,y0,x1,y1,cor,passo=14){
+  const pts=[]; let cima=true;
+  for(let x=x0; x<=x1; x+=passo){ pts.push([x+r(-3,3), cima? y0+r(-4,6) : y1+r(-6,4)]); cima=!cima; }
+  ctx.save(); ctx.globalAlpha=0.45; ctx.strokeStyle=cor; ctx.lineWidth=5; ctx.lineCap='round';
+  ctx.beginPath(); pts.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y)); ctx.stroke(); ctx.restore();
+}
+const quad=(x,y,w,h)=>[[x,y],[x+w,y],[x+w,y+h],[x,y+h]];
+// chão e paredes
+giz([[60,640],[840,640]], '#8a6a4a', 9);
+// janela com sol
+giz(quad(520,150,240,200), '#3b7dd8', 8, true);
+giz([[640,150],[640,350]], '#3b7dd8', 6); giz([[520,250],[760,250]], '#3b7dd8', 6);
+rabisca(530,160,630,240,'#9cc8f2'); rabisca(650,160,750,240,'#9cc8f2');
+const sol=[]; for(let i=0;i<16;i++){ const a=i/16*2*Math.PI; sol.push([700+Math.cos(a)*30, 200+Math.sin(a)*30]); }
+giz(sol,'#f2b705',7,true); rabisca(678,182,722,218,'#f7c948',8);
+// cama com coberta rosa e travesseiro
+giz(quad(110,470,330,120), '#c0603d', 9, true);
+rabisca(120,480,430,580,'#f29bb2');
+giz(quad(120,440,90,40), '#5a9e6f', 7, true); rabisca(125,445,205,475,'#a8d5b0',10);
+giz([[110,590],[110,640]], '#8a6a4a', 8); giz([[440,590],[440,640]], '#8a6a4a', 8);
+// casinha na parede (a cabana que ela quer)
+giz([[150,400],[230,300],[310,400]], '#7b4fbf', 8);
+// estrelas
+[[150,150],[260,110],[380,170]].forEach(([x,y])=>{ const p=[]; for(let i=0;i<10;i++){ const a=-Math.PI/2+i*Math.PI/5, rr=i%2?12:28; p.push([x+Math.cos(a)*rr, y+Math.sin(a)*rr]); } giz(p,'#f2b705',6,true); });
+// a menina (palitinho) ao lado da cama
+const cx=600, cy=470;
+const cab=[]; for(let i=0;i<14;i++){ const a=i/14*2*Math.PI; cab.push([cx+Math.cos(a)*34, cy+Math.sin(a)*34]); }
+giz(cab,'#3a2a20',6,true);
+giz([[cx-40,cy-20],[cx-50,cy+40]], '#3a2a20', 6); giz([[cx+40,cy-20],[cx+50,cy+40]], '#3a2a20', 6);
+giz([[cx,cy+34],[cx-60,cy+170],[cx+60,cy+170],[cx,cy+34]], '#e0457b', 8);
+rabisca(cx-45,cy+90,cx+45,cy+165,'#f29bb2',12);
+giz([[cx-25,cy+170],[cx-30,cy+230]], '#3a2a20', 6); giz([[cx+25,cy+170],[cx+30,cy+230]], '#3a2a20', 6);
+giz([[cx-50,cy+80],[cx-110,cy+40]], '#3a2a20', 6); giz([[cx+50,cy+80],[cx+110,cy+120]], '#3a2a20', 6);
+giz([[cx-14,cy-6],[cx-10,cy-4]], '#3a2a20', 6); giz([[cx+10,cy-6],[cx+14,cy-4]], '#3a2a20', 6);
+giz([[cx-14,cy+12],[cx,cy+20],[cx+14,cy+12]], '#3a2a20', 5);
+// o nome, como criança escreve
+ctx.save(); ctx.globalAlpha=0.8; ctx.fillStyle='#7b4fbf'; ctx.font='bold 64px "Comic Sans MS", "Segoe Print", cursive';
+ctx.fillText('MEU QUARTO', 140, 800); ctx.restore();
+window.__pronto = true;
+</script></body></html>

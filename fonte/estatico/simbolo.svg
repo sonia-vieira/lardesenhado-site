@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="420 225 460 490" role="img" aria-label="Símbolo LD — Lar Desenhado">
+  <!-- Símbolo LD redesenhado em vetor a partir do logo aprovado (07/10/2026).
+       L = lápis e lar (terracota); D = desenhado e casa (sálvia), com a janela;
+       estrelas = bênção e esperança; coração = o amor da família. -->
+  <!-- ponta do lápis -->
+  <path d="M440 369 L474 304 H536 L570 369 Z" fill="#F1E3D1"/>
+  <path d="M478 304 L499 263 Q505 252 511 263 L532 304 Z" fill="#C36E4D" stroke="#C36E4D" stroke-width="6" stroke-linejoin="round"/>
+  <!-- L: o corpo do lápis que vira o pé da letra -->
+  <path d="M440 369 H500 V613 Q500 627 514 627 H652 Q656 627 656 631 V690 Q656 694 652 694 H508 Q440 694 440 626 Z" fill="#C36E4D"/>
+  <!-- haste do D: a outra face do lápis -->
+  <path d="M509 369 H570 V613 Q570 619 564 619 H515 Q509 619 509 613 Z" fill="#899883"/>
+  <!-- bojo do D -->
+  <path d="M586 352 H640 C735 352 806 430 806 538 C806 628 752 694 680 694 H678 Q674 694 674 690 V631 Q674 627 678 627 H690 C715 627 735 607 735 580 V487 C735 459 713 437 685 437 H590 Q586 437 586 433 Z" fill="#899883"/>
+  <!-- janela -->
+  <path d="M619 580 V519 A36.5 36.5 0 0 1 692 519 V580 Z" fill="#D3A55F" opacity="0.85"/>
+  <rect x="651" y="478" width="9" height="106" fill="#FAF7F1"/>
+  <rect x="615" y="526" width="81" height="9" fill="#FAF7F1"/>
+  <!-- estrela grande (dourado) -->
+  <path d="M771 212 L782 241 L813 243 L789 262 L797 292 L771 275 L745 292 L753 262 L729 243 L760 241 Z" fill="#D9A15E" stroke="#D9A15E" stroke-width="7" stroke-linejoin="round"/>
+  <!-- estrela pequena (sálvia) -->
+  <path d="M846 298 L852 313 L868 314 L856 324 L860 340 L846 331 L832 340 L836 324 L824 314 L840 313 Z" fill="#899883" stroke="#899883" stroke-width="5" stroke-linejoin="round"/>
+  <!-- coração (blush) -->
+  <path d="M825 436 C810 418 795 404 795 389 C795 377 804 371 812 371 C819 371 823 375 825 380 C827 375 831 371 838 371 C846 371 855 377 855 389 C855 404 840 418 825 436 Z" fill="#DFA58F" stroke="#DFA58F" stroke-width="4" stroke-linejoin="round"/>
+</svg>

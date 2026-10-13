@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>Certificado de mini designer</title>
+<!-- O certificado de mini designer (v1, 13/10/2026), no formato da capa do caderno do Detalhes (folha A4 deitada).
+     Exemplo para o site; o app pode gerar o de cada criança com o mesmo desenho. -->
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--creme:#FAF7F1;--areia:#E9DCCB;--terra:#C36E4D;--terraEsc:#A85A3C;--salvia:#899883;--salviaEsc:#5F6E5A;--blush:#DFA58F;--dourado:#D3A55F;--marrom:#60524B}
+  *{box-sizing:border-box} body{margin:0;background:#fff;font-family:Nunito,sans-serif;color:var(--marrom)}
+  .folha{width:1123px;height:794px;background:var(--creme);padding:30px 32px 22px;display:flex;flex-direction:column;gap:16px;position:relative;overflow:hidden}
+  .topo{display:flex;justify-content:space-between;align-items:flex-start}
+  .chip{display:inline-block;background:#f6e3da;color:var(--terraEsc);font-weight:800;font-size:12px;padding:5px 12px;border-radius:999px}
+  .chip:before{content:"★ ";color:var(--dourado)}
+  h1{font-family:Fraunces,serif;font-weight:600;font-size:34px;margin:8px 0 2px}
+  .sub{font-size:13px;margin:0}
+  .marca{display:flex;gap:10px;align-items:center}
+  .marca img{width:48px}
+  .marca b{font-family:Fraunces,serif;font-size:22px;color:var(--terra);font-weight:600;display:block}
+  .marca small{font-size:10px;color:#8d7f76}
+  .arco{position:absolute;width:64px;height:84px;border:7px solid #f3e1d9;border-bottom:none;border-radius:40px 40px 0 0;top:24px;left:690px}
+  .corpo{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:16px;min-height:0}
+  .card{background:#fff;border-radius:22px;padding:34px 34px 26px;position:relative;overflow:hidden;display:flex;flex-direction:column}
+  .card .simb{width:82px}
+  .marca-card{display:flex;align-items:center;gap:14px}.marca-card b{font-family:Fraunces,serif;font-size:26px;color:var(--terra);font-weight:600;display:block}.marca-card small{font-size:11px;color:#8d7f76}
+  .tit{font-family:Fraunces,serif;font-size:22px;color:var(--terraEsc);margin:22px 0 0;font-weight:600}
+  .nome{font-family:Fraunces,serif;font-size:58px;font-weight:600;margin:6px 0 10px;line-height:1}
+  .texto{font-size:15px;line-height:1.55;max-width:26em;margin:0}
+  .rodape-card{margin-top:auto;font-size:12.5px;line-height:1.5}
+  .assinatura{font-family:Fraunces,serif;font-size:17px;color:var(--terraEsc);margin-top:10px}
+  .card .arco2{position:absolute;right:28px;bottom:-6px;width:110px;height:130px;border:16px solid #f6e6df;border-bottom:none;border-radius:70px 70px 0 0}
+  .desenho h2{font-family:Fraunces,serif;font-size:20px;font-weight:600;margin:0 0 12px}
+  .desenho .moldura{flex:1;border-radius:14px;background:var(--creme);display:grid;place-items:center;padding:12px;min-height:0}
+  .desenho .moldura img{max-width:100%;max-height:100%;border-radius:8px}
+  .desenho p{font-size:12.5px;margin:10px 0 0;color:#8d7f76}
+  .regua{background:#fff;border-radius:16px;padding:10px 16px;display:flex;align-items:center;gap:0;font-size:11px}
+  .regua div{padding:0 16px;border-left:1px solid var(--areia)} .regua div:first-child{padding-left:0;border-left:none}
+  .regua span{display:block;color:#8d7f76;font-size:9.5px} .regua b{font-size:11.5px}
+  .regua .fim{margin-left:auto;display:flex;align-items:center;gap:10px;border:none}
+  .bola{width:38px;height:38px;border-radius:50%;background:var(--terra);color:#fff;font-weight:800;display:grid;place-items:center;font-size:17px}
+  .icones{color:var(--terra);font-size:17px;letter-spacing:6px}
+</style></head>
+<body>
+<div class="folha" id="c">
+  <div class="arco"></div>
+  <div class="topo">
+    <div>
+      <span class="chip">Certificado · o mini designer</span>
+      <h1>Quarto da Helena</h1>
+      <p class="sub">Quarto da Helena · Ela imaginou, desenhou e ajudou a escolher. Este quarto também é obra dela.</p>
+    </div>
+    <div class="marca"><img src="../fonte/estatico/simbolo.svg" alt=""><div><b>Lar Desenhado</b><small>projetos para quartos de bebê e infantis</small></div></div>
+  </div>
+  <div class="corpo">
+    <div class="card">
+      <div class="marca-card"><img class="simb" src="../fonte/estatico/simbolo.svg" alt=""><div><b>Lar Desenhado</b><small>projetos para quartos de bebê e infantis</small></div></div>
+      <p class="tit">Certificado de mini designer</p>
+      <p class="nome">Helena</p>
+      <p class="texto">ajudou a imaginar, desenhar e projetar o próprio quarto, junto com a família. O desenho dela foi o
+      ponto de partida de tudo.</p>
+      <div class="rodape-card">Nosso apartamento<br>13 de outubro de 2026</div>
+      <div class="arco2"></div>
+    </div>
+    <div class="card desenho">
+      <h2>O desenho da Helena</h2>
+      <div class="moldura"><img src="../fonte/estatico/img/desenho-crianca.webp" alt="O desenho que a Helena fez do quarto que ela imagina"></div>
+      <p>"Meu quarto", o quarto que ela imaginou no primeiro dia.</p>
+    </div>
+  </div>
+  <div class="regua">
+    <div><span>Quarto</span><b>Quarto da Helena</b></div>
+    <div><span>Casa</span><b>Nosso apartamento</b></div>
+    <div><span>Assunto</span><b>Certificado</b></div>
+    <div><span>Data</span><b>13/10/2026</b></div>
+    <div class="fim"><span class="icones">∩ ❦ ♥</span><span class="bola">★</span></div>
+  </div>
+</div>
+<script>document.fonts.ready.then(()=>{ window.__pronto = true; });</script>
+</body></html>

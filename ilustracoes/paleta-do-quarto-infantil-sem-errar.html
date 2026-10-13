@@ -1,0 +1,49 @@
+<!doctype html><html><head><meta charset="utf-8"><title>A paleta do quarto</title>
+<style>html,body{margin:0;background:#FAF7F1}canvas{display:block}</style></head>
+<body><canvas id="c" width="1080" height="1350"></canvas>
+<script src="pintura_ld.js"></script>
+<script>
+// Cena: a base neutra (parede, piso, móveis de madeira clara) e a cor só no que se troca:
+// almofadas, manta, tapete e quadro. Na mesinha, o leque de amostras de tinta.
+semear(57);
+papel();
+const PISO=1010;
+pinta(ret(40,60,W-80,PISO-60), P.areia, {amp:5, angulo:Math.PI/2, seca:0.9, alfa:0.6});
+pinta(ret(40,PISO,W-80,H-PISO-80), mistura(P.dourado,0.32), {amp:5, angulo:0.02, seca:0.6});
+pinta(ret(40,PISO-12,W-80,20), P.creme, {amp:3, seca:0.3});
+// quadro com formas simples
+pinta(ret(170,300,190,240), P.creme, {amp:3, seca:0.3});
+pinta(ret(184,314,162,212), mistura(P.areia,0.2), {amp:2, seca:0.4});
+pinta(arco(265,500,110,150), P.salvia, {amp:3});
+pinta(circ(300,370,26,26), P.dourado, {amp:2});
+// cama de madeira clara com cabeceira arredondada
+pinta(arco(330,PISO-150,420,330), mistura(P.dourado,0.05), {amp:4, angulo:Math.PI/2, seca:0.5});
+pinta(ret(110,PISO-200,440,170), mistura(P.dourado,0.05), {amp:3, seca:0.5});
+pinta(ret(120,PISO-250,420,60), P.creme, {amp:4, seca:0.3});
+pinta([[300,PISO-250],[540,PISO-250],[556,PISO-140],[300,PISO-150]], P.terracota, {amp:6, angulo:0.08, seca:0.6});
+pinta(circ(190,PISO-280,58,36), P.salvia, {amp:4});
+pinta(circ(280,PISO-276,52,32), P.blush, {amp:4});
+pinta(circ(360,PISO-270,40,26), P.dourado, {amp:3});
+pinta(ret(130,PISO-30,12,30), P.marrom, {amp:1}); pinta(ret(530,PISO-30,12,30), P.marrom, {amp:1});
+// cômoda neutra
+pinta(ret(640,PISO-330,330,320), mistura(P.dourado,0.1), {amp:3, seca:0.5});
+for(const y of [PISO-300,PISO-200,PISO-100]){ traco(650,y+90,960,y+90,P.marrom,2,0.3); pinta(circ(805,y+46,8,8), P.marrom, {amp:1}); }
+pinta(ret(660,PISO-10,14,14), P.marrom, {amp:1}); pinta(ret(936,PISO-10,14,14), P.marrom, {amp:1});
+// vaso na cômoda
+pinta([[860,PISO-330],[920,PISO-330],[910,PISO-400],[870,PISO-400]], P.creme, {amp:2});
+traco(890,PISO-400,870,PISO-480,P.salviaEsc,3,0.8); traco(890,PISO-400,915,PISO-470,P.salviaEsc,3,0.8);
+// tapete redondo em cores
+pinta(circ(480,1130,300,66), P.blush, {amp:7, seca:0.6, alfa:0.9});
+pinta(circ(400,1125,110,32), P.salvia, {amp:5, seca:0.6});
+pinta(circ(590,1135,100,28), P.dourado, {amp:5, seca:0.6});
+// mesinha redonda com o leque de amostras de tinta
+pinta(ret(884,1120,14,120), mistura(P.dourado,-0.3), {amp:1.5});
+pinta(circ(890,1112,110,28), mistura(P.dourado,-0.2), {amp:3});
+const cores=[P.creme,P.areia,P.blush,P.terracota,P.dourado,P.salvia,P.salviaEsc];
+cores.forEach((c,i)=>{ const a=-Math.PI*0.92+i*0.15, ax=840, ay=1098, R=125;
+  pinta([[ax,ay],[ax+Math.cos(a)*R,ay+Math.sin(a)*R],[ax+Math.cos(a+0.13)*R,ay+Math.sin(a+0.13)*R]], c, {amp:1.5, seca:0.2}); });
+escreve('base neutra', 650, 160, {tam:30, cor:P.marrom});
+escreve('a cor no que se troca', 650, 200, {tam:30, cor:P.terraEsc});
+assinatura();
+window.__pronto = true;
+</script></body></html>

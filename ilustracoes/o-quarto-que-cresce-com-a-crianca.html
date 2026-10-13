@@ -1,0 +1,70 @@
+<!doctype html><html><head><meta charset="utf-8"><title>O quarto que cresce</title>
+<style>html,body{margin:0;background:#FAF7F1}canvas{display:block}</style></head>
+<body><canvas id="c" width="1080" height="1350"></canvas>
+<script src="pintura_ld.js"></script>
+<script>
+// Cena: o MESMO quarto em duas fases, um em cima do outro. O que é fixo (armário alto e nichos) fica igual;
+// o que é solto muda. Os nichos abertos de baixo ganham portas na segunda fase.
+semear(33);
+papel();
+function quarto(y0, fase){
+  const h=560, PISO=y0+h-110;
+  pinta(ret(40,y0,W-80,PISO-y0), P.areia, {amp:5, angulo:Math.PI/2, seca:0.9, alfa:0.55});
+  pinta(ret(40,PISO,W-80,110), mistura(P.dourado,0.28), {amp:5, angulo:0.02, seca:0.6});
+  pinta(ret(40,PISO-10,W-80,16), P.creme, {amp:2, seca:0.3});
+  // janela (igual nas duas)
+  pinta(ret(470,y0+70,190,220), P.creme, {amp:4, angulo:Math.PI/2, seca:0.4});
+  pinta(ret(484,y0+84,162,192), mistura(P.blush,0.5), {amp:3, seca:0.7});
+  pinta([[484,y0+230],[540,y0+205],[600,y0+222],[646,y0+200],[646,y0+276],[484,y0+276]], P.salvia, {amp:3});
+  // armário alto fixo, à direita (igual nas duas)
+  pinta(ret(860,y0+40,150,PISO-y0-40), mistura(P.creme,-0.04), {amp:3, angulo:Math.PI/2, seca:0.4});
+  traco(935,y0+50,935,PISO-10,P.marrom,2,0.35);
+  pinta(ret(920,y0+250,6,40), P.terraEsc, {amp:1}); pinta(ret(944,y0+250,6,40), P.terraEsc, {amp:1});
+  // os nichos baixos fixos, à esquerda: abertos na fase 1, com portas na fase 2
+  const NX=70, NY=PISO-150;
+  pinta(ret(NX,NY,300,150), mistura(P.creme,-0.05), {amp:3, seca:0.4});
+  if(fase===1){
+    pinta(ret(NX+12,NY+14,132,122), mistura(P.areia,-0.08), {amp:2, seca:0.5});
+    pinta(ret(NX+156,NY+14,132,122), mistura(P.areia,-0.08), {amp:2, seca:0.5});
+    pinta(ret(NX+24,NY+66,108,66), P.salvia, {amp:3});                 // cesto
+    pinta(circ(NX+222,NY+110,40,26), P.terracota, {amp:3});            // bola
+    pinta(ret(NX+180,NY+40,30,60), P.dourado, {amp:2});                // livro
+  } else {
+    pinta(ret(NX+10,NY+12,136,126), P.salvia, {amp:2, angulo:Math.PI/2, seca:0.5});
+    pinta(ret(NX+154,NY+12,136,126), P.salvia, {amp:2, angulo:Math.PI/2, seca:0.5});
+    pinta(ret(NX+130,NY+60,6,30), P.marrom, {amp:1}); pinta(ret(NX+164,NY+60,6,30), P.marrom, {amp:1});
+  }
+  // a cama (fase 1: baixa no chão; fase 2: solteiro com cabeceira)
+  if(fase===1){
+    pinta(ret(390,PISO-56,290,50), mistura(P.dourado,-0.25), {amp:3, seca:0.5});
+    pinta(ret(396,PISO-88,278,36), mistura(P.creme,-0.02), {amp:3, seca:0.3});
+    pinta([[430,PISO-88],[674,PISO-88],[680,PISO-50],[430,PISO-52]], P.blush, {amp:4, seca:0.5});
+    pinta(circ(445,PISO-100,32,20), P.terracota, {amp:3});
+  } else {
+    pinta(ret(390,PISO-150,20,150), mistura(P.dourado,-0.3), {amp:2});
+    pinta(ret(390,PISO-76,290,60), mistura(P.dourado,-0.25), {amp:3, seca:0.5});
+    pinta(ret(406,PISO-110,272,36), mistura(P.creme,-0.02), {amp:3, seca:0.3});
+    pinta([[460,PISO-110],[676,PISO-110],[682,PISO-58],[460,PISO-62]], P.terracota, {amp:4, seca:0.5});
+    pinta(circ(445,PISO-124,32,20), P.salvia, {amp:3});
+    pinta(ret(380,PISO-16,10,16), P.marrom, {amp:1}); pinta(ret(672,PISO-16,10,16), P.marrom, {amp:1});
+  }
+  // a MESMA mesa regulável: baixa aos 3, alta aos 8 (os pés sobem); a cadeira acompanha
+  const MX=700, MW=140, alt = fase===1 ? 72 : 118, cad = fase===1 ? 42 : 72;
+  pinta(ret(MX,PISO-alt,MW,12), mistura(P.dourado,-0.28), {amp:2});
+  pinta(ret(MX+8,PISO-alt+10,10,alt-10), mistura(P.dourado,-0.32), {amp:1.5, angulo:Math.PI/2});
+  pinta(ret(MX+MW-18,PISO-alt+10,10,alt-10), mistura(P.dourado,-0.32), {amp:1.5, angulo:Math.PI/2});
+  pinta(ret(MX+40,PISO-cad,54,10), P.salvia, {amp:2});
+  pinta(ret(MX+44,PISO-cad+8,8,cad-8), P.marrom, {amp:1}); pinta(ret(MX+82,PISO-cad+8,8,cad-8), P.marrom, {amp:1});
+  pinta(ret(MX+84,PISO-cad-44,10,46), P.salvia, {amp:1.5});
+  if(fase===2){ pinta(ret(MX+20,PISO-alt-40,26,40), P.dourado, {amp:1.5}); pinta(ret(MX+50,PISO-alt-30,40,30), P.creme, {amp:1.5}); }
+  else { pinta(circ(MX+60,PISO-alt-14,16,12), P.terracota, {amp:2}); }
+  pinta(circ(560,PISO+52,190,32), mistura(P.salvia,0.25), {amp:5, seca:0.6});
+  escreve(fase===1 ? 'aos 3 anos' : 'aos 8 anos', 70, y0+60, {tam:40});
+  escreve(fase===1 ? 'nichos abertos' : 'os nichos ganham portas', 70, PISO-170, {tam:24, cor:P.marrom});
+  escreve(fase===1 ? 'mesa baixa' : 'a mesma mesa, mais alta', fase===1 ? MX : MX-170, PISO-alt-(fase===1?40:56), {tam:24, cor:P.marrom});
+}
+quarto(70, 1);
+quarto(700, 2);
+assinatura();
+window.__pronto = true;
+</script></body></html>
